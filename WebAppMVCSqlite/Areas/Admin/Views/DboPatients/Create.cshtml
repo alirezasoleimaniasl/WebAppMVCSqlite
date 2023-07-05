@@ -1,0 +1,397 @@
+﻿@model WebAppMVCSqlite.Areas.Admin.Models.ViewModels.PatientCreateEditViewModel
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+@*<link href="/lib/select2/css/select2.min.css" rel="stylesheet" />
+<script src="/lib/select2/js/select2.min.js"></script>
+<script src="/lib/select2/js/i18n/fa.js"></script>*@
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+<div class="container-fluid">
+    <form asp-action="Create" enctype="multipart/form-data">
+        @if (ViewBag.Error != null)
+        {
+            <div class="alert alert-danger alert-dismissible">
+                @ViewBag.Error
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        }
+        <div class="row">          
+                    
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-light">
+                        افزودن اطلاعات بیمار
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+
+                            <!--PersonalInformationSection-->
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    اطلاعات هویتی
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="form-control-label" asp-for="FirstName"></label>
+                                                <input asp-for="FirstName" class="form-control" placeholder="نام">
+                                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="LastName" class="form-control-label"></label>
+                                                <input asp-for="LastName" class="form-control" placeholder="نام خانوادگی">
+                                                <span asp-validation-for="LastName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="NationalCode" class="form-control-label"> </label>
+                                                <input asp-for="NationalCode" class="form-control" placeholder="کد ملی">
+                                                <span asp-validation-for="NationalCode" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <label asp-for="DateOfBirth"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text cursor-pointer" id="BirthDate">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <input asp-for="DateOfBirth" class="form-control" id="InputBirthDate" style="direction:ltr" />
+                                            </div>
+                                            <span asp-validation-for="DateOfBirth" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="FatherName" class="form-control-label"> </label>
+                                                <input asp-for="FatherName" class="form-control" placeholder="نام پدر">
+                                                <span asp-validation-for="FatherName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Gender" class="form-control-label"></label>
+                                                <select asp-for="Gender" class="form-control">
+                                                    <option value="">انتخاب کنید</option>
+                                                    <option value="1">مرد</option>
+                                                    <option value="1">زن</option>
+                                                </select>
+                                                <span asp-validation-for="Gender" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="Job" class="form-control-label"></label>
+                                                <select asp-for="Job" class="form-control select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                    <option value="1">خانه دار</option>
+                                                    <option value="2">از کار افتاده</option>
+                                                    <option value="3">بیکار</option>
+                                                    <option value="4">کارگر</option>
+                                                    <option value="5">کارمند</option>
+                                                    <option value="6">آزاد</option>
+                                                    <option value="7">کشاورز</option>
+                                                    <option value="8">راننده</option>
+                                                    <option value="9">پرستار</option>
+                                                    <option value="10">پزشک</option>
+                                                    <option value="11">پرسنل بهداشت</option>
+                                                    <option value="12">پرسنل آزمایشگاه</option>
+                                                    <option value="13">داروساز</option>
+                                                    <option value="14">بهیار</option>
+                                                    <option value="15">پرسنل بیمارستان</option>
+                                                    <option value="16">نظامی و انتظامی</option>
+                                                    <option value="17">معلم</option>
+                                                    <option value="18">دانش آموز</option>
+                                                    <option value="19">دانشجو</option>
+                                                    <option value="20">کودک</option>
+                                                    <option value="21">بازنشسته</option>
+                                                    <option value="22">سایر</option>
+                                                    <option value="23">نامشخص</option>
+                                                    <option value="24">هیئت علمی</option>
+                                                </select>
+                                                <span asp-validation-for="Job" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                            
+
+                            </div>
+                            <!--PersonalInformationSection-->
+
+                            <!--VaccineSection-->
+                            <div class="card text-center">
+                                <div class="card-header">
+                                    <div class="toggle-switch d-block" data-ts-color="success">
+                                        <label for="ts1" class="ts-label">آیا بیمار واکسن کرونا زده است؟</label>
+                                        <input type="checkbox" id="ts1" hidden="hidden">
+                                        <label for="ts1" class="ts-helper float-left"></label>
+                                    </div>
+                                </div>
+                                <div class="card-body" id="cardVaccine">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="firstVaccineId" class="form-control-label"></label>
+                                                <select asp-for="firstVaccineId" asp-items="ViewBag.VaccineId" class="form-control select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                </select>
+                                                <span asp-validation-for="firstVaccineId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="secondVaccineId" class="form-control-label"></label>
+                                                <select asp-for="secondVaccineId" asp-items="ViewBag.VaccineId" class="form-control select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                </select>
+                                                <span asp-validation-for="secondVaccineId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="thirdVaccineId" class="form-control-label"></label>
+                                                <select asp-for="thirdVaccineId" asp-items="ViewBag.VaccineId" class="form-control select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                </select>
+                                                <span asp-validation-for="thirdVaccineId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--VaccineSection-->
+
+                            <!--LaboratorySection-->
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    <div>
+                                        بخش آزمایشگاه
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="LabId" class="form-control-label"></label>
+                                                <select asp-for="LabId" asp-items="ViewBag.LabId" class="form-control select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                </select>
+                                                <span asp-validation-for="LabId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label asp-for="SamplingDate"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text cursor-pointer" id="SamplingDate">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <input asp-for="SamplingDate" class="form-control" id="InputSamplingDate" style="direction:ltr" />
+                                            </div>
+                                            <span asp-validation-for="SamplingDate" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label asp-for="ToLabDate"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text cursor-pointer" id="ToLabDate">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <input asp-for="ToLabDate" class="form-control" id="InputToLabDate" style="direction:ltr" />
+                                            </div>
+                                            <span asp-validation-for="ToLabDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <div class="toggle-switch d-block" data-ts-color="danger">
+                                                    <label asp-for="TestAnswer" class="ts-label form-control-label"></label>
+                                                    <input class="form-control" type="checkbox" id="ts2" asp-for="TestAnswer">
+                                                    <label for="ts2" class="ts-helper float-left"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--Laboratory Section-->
+
+                            <!--HospitalSection-->
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    بخش بیمارستان
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="HospitalId" class="form-control-label"></label>
+                                                <select asp-for="HospitalId" asp-items="ViewBag.HospitalId" class="form-control select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                </select>
+                                                <span asp-validation-for="HospitalId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            
+                            <!--HospitalSection-->
+
+                            <!-- AddressSection -->
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    اطلاعات تماس
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="CityId" class="form-control-label"></label>
+                                                <select asp-for="CityId" asp-items="ViewBag.CityId" class="form-control select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                </select>
+                                                <span asp-validation-for="CityId" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="PhoneNumber" class="form-control-label"> </label>
+                                                <input asp-for="PhoneNumber" class="form-control" placeholder="شماره همراه">
+                                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="FullAddress"></label>
+                                                <textarea asp-for="FullAddress" class="form-control" rows="5"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- AddressSection -->
+
+                        </div>
+                    </div>
+                    <div class="card-footer bg-light text-right">
+                        <button type="submit" class="btn btn-success float-left">ثبت اطلاعات</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+</div>
+
+
+<script>
+    
+    $("#BirthDate").MdPersianDateTimePicker({
+        targetTextSelector: "#InputBirthDate",
+        placement: 'right',
+    });
+
+    $("#SamplingDate").MdPersianDateTimePicker({
+        targetTextSelector: "#InputSamplingDate",
+        placement: 'right',
+    });
+
+    $("#ToLabDate").MdPersianDateTimePicker({
+        targetTextSelector: "#InputToLabDate",
+        placement: 'right',
+    });
+
+    $("#AnswerDate").MdPersianDateTimePicker({
+        targetTextSelector: "#InputAnswerDate",
+        placement: 'right',
+    });
+
+    $(document).ready(function () {
+        
+        $("#firstSelect").select2({
+            language: "fa"
+        });
+
+        //begin
+        //show or hide card-body by checkbox
+        var checkbox = $('#ts1'),
+            chShipBlock = $('#cardVaccine');
+
+        chShipBlock.hide();
+
+        checkbox.on('click', function () {
+            if ($(this).is(':checked')) {
+                chShipBlock.show();
+                chShipBlock.find('input').attr('required', true);
+            } else {
+                chShipBlock.hide();
+                chShipBlock.find('input').attr('required', false);
+            }
+        });
+        //end
+
+        /*$("#InputBirthDate").inputmask("9999/99/99", { "placeholder": "_" });*/
+
+        //Persian character and numbers (and space!)
+        Inputmask.extendDefinitions({
+            'f': {
+                validator: "[۰-۹\u060C-\u0638\u0639-\u0648\u06A9\u06AF\u06CC\u067E\u0686\u064A\u0649\u0626\u0698 ]",
+                cardinality: 1
+            },
+
+            'n':
+            {
+                validator: "[1-9]",
+            },
+
+            'm':
+            {
+                validator: "[۰-۹]",
+            },
+
+            'z':
+            {
+                validator: "[۱-۹]",
+            }
+        });
+
+        $("#InputBirthDate").inputmask("(n999|zmmm)/(0n|10|11|12|۰z|۱۰|۱۱|۱۲)/(0n|19|29|30|31|۰z|۱m|۲m|۳۰|۳۱)", { "placeholder": "_" });
+        $("#InputName").inputmask("f{*}");
+
+    });
+</script>

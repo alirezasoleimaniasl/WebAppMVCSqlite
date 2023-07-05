@@ -1,0 +1,22 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>لاین لیست واگیر</title>
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <script src="/vendor/jquery/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand navbar-light bg-primary fixed-top">
+            <a class="navbar-brand text-white">لاین لیست گروه مبارزه با بیماری های واگیر</a>
+            @*<partial name="_LoginPartial" />*@
+        </nav>
+    </header>
+    <div class="container">
+        @RenderBody()
+    </div>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
