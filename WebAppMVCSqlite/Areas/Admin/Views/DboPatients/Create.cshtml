@@ -45,14 +45,14 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-control-label" asp-for="FirstName"></label>
-                                                <input asp-for="FirstName" class="form-control" placeholder="نام">
+                                                <input asp-for="FirstName" class="form-control" placeholder="نام" tabindex="1">
                                                 <span asp-validation-for="FirstName" class="text-danger"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label asp-for="LastName" class="form-control-label"></label>
-                                                <input asp-for="LastName" class="form-control" placeholder="نام خانوادگی">
+                                                <input asp-for="LastName" class="form-control" placeholder="نام خانوادگی" tabindex="2">
                                                 <span asp-validation-for="LastName" class="text-danger"></span>
                                             </div>
                                         </div>
@@ -61,7 +61,7 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label asp-for="NationalCode" class="form-control-label"> </label>
-                                                <input asp-for="NationalCode" class="form-control" placeholder="کد ملی">
+                                                <input asp-for="NationalCode" class="form-control" placeholder="کد ملی" tabindex="3">
                                                 <span asp-validation-for="NationalCode" class="text-danger"></span>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                                         <i class="fa fa-calendar"></i>
                                                     </span>
                                                 </div>
-                                                <input asp-for="DateOfBirth" class="form-control" id="InputBirthDate" style="direction:ltr" />
+                                                <input asp-for="DateOfBirth" class="form-control" id="InputBirthDate" style="direction:ltr" tabindex="4"/>
                                             </div>
                                             <span asp-validation-for="DateOfBirth" class="text-danger"></span>
                                         </div>
@@ -93,7 +93,7 @@
                                                 <select asp-for="Gender" class="form-control">
                                                     <option value="">انتخاب کنید</option>
                                                     <option value="1">مرد</option>
-                                                    <option value="1">زن</option>
+                                                    <option value="2">زن</option>
                                                 </select>
                                                 <span asp-validation-for="Gender" class="text-danger"></span>
                                             </div>
@@ -148,7 +148,7 @@
                                         <label for="ts1" class="ts-helper float-left"></label>
                                     </div>
                                 </div>
-                                <div class="card-body" id="cardVaccine">
+                                <div class="card-body" id="vaccineCard">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -253,7 +253,8 @@
 
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-6">
+
+                                        <div class="col-md-4">
                                             <div class="form-group">
                                                 <label asp-for="HospitalId" class="form-control-label"></label>
                                                 <select asp-for="HospitalId" asp-items="ViewBag.HospitalId" class="form-control select2">
@@ -262,11 +263,122 @@
                                                 <span asp-validation-for="HospitalId" class="text-danger"></span>
                                             </div>
                                         </div>
+
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="AdmissionType" class="form-control-label"></label>
+                                                <select asp-for="AdmissionType" class="form-control">
+                                                    <option value="">انتخاب کنید</option>
+                                                    <option value="1">بستری</option>
+                                                    <option value="2">سرپایی</option>
+                                                </select>
+                                                <span asp-validation-for="AdmissionType" class="text-danger"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label asp-for="SymptomsDate"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text cursor-pointer" id="SymptomsDate">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <input asp-for="SymptomsDate" class="form-control" id="InputSymptomsDate" style="direction:ltr" />
+                                            </div>
+                                            <span asp-validation-for="SymptomsDate" class="text-danger"></span>
+                                        </div>
+
                                     </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="form-group">
+                                                <div class="toggle-switch d-block" data-ts-color="danger">
+                                                    <label asp-for="HistoryOfCovid" class="ts-label form-control-label" data-toggle="tooltip" data-placement="top" title="رنگ قرمز به معنای داشتن سابقه کووید است"></label>
+                                                    <input class="form-control" type="checkbox" id="ts3" asp-for="HistoryOfCovid">
+                                                    <label for="ts3" class="ts-helper float-left"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-5">
+                                            <div class="form-group">
+                                                <div class="toggle-switch d-block" data-ts-color="danger">
+                                                    <label asp-for="UnderlyingDiseas" class="ts-label form-control-label"></label>
+                                                    <input class="form-control" type="checkbox" id="ts5" asp-for="UnderlyingDiseas">
+                                                    <label for="ts5" class="ts-helper float-left"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-4" id="IsPregnant">
+                                            <div class="form-group">
+                                                <div class="toggle-switch d-block" data-ts-color="danger">
+                                                    <label asp-for="IsPregnant" class="ts-label form-control-label"></label>
+                                                    <input class="form-control" type="checkbox" id="ts4" asp-for="IsPregnant">
+                                                    <label for="ts4" class="ts-helper float-left"></label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row justify-content-center" id="diseasName">
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="UnderlyingDiseasName"></label>
+                                                <textarea asp-for="UnderlyingDiseasName" class="form-control" rows="5" placeholder="بیماری هایی مانند قلبی عروقی و یا مزمن ریوی"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <label asp-for="HospitalInDate"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text cursor-pointer" id="HospitalInDate">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <input asp-for="HospitalInDate" class="form-control" id="InputHospitalInDate" style="direction:ltr" />
+                                            </div>
+                                            <span asp-validation-for="HospitalInDate" class="text-danger"></span>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="form-group">
+                                                <label asp-for="HospitalSection" class="form-control-label"></label>
+                                                <select asp-for="HospitalSection" class="form-control select2">
+                                                    <option value="">انتخاب کنید</option>
+                                                    <option value="1">ویژه</option>
+                                                    <option value="2">عمومی</option>
+                                                    <option value="3">کودکان</option>
+                                                    <option value="4">سایر</option>
+                                                    <option value="5">CCU</option>
+                                                    <option value="5">ICU</option>
+                                                    <option value="6">ایزوله</option>
+                                                    <option value="7">ایزوله تنفسی</option>
+                                                    <option value="8">اورژانس</option>
+                                                    <option value="9">مرکز 16 ساعته</option>
+                                                </select>
+                                                <span asp-validation-for="HospitalSection" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label asp-for="HospitalOutDate"></label>
+                                            <div class="input-group">
+                                                <div class="input-group-append">
+                                                    <span class="input-group-text cursor-pointer" id="HospitalOutDate">
+                                                        <i class="fa fa-calendar"></i>
+                                                    </span>
+                                                </div>
+                                                <input asp-for="HospitalOutDate" class="form-control" id="InputHospitalOutDate" style="direction:ltr" />
+                                            </div>
+                                            <span asp-validation-for="HospitalOutDate" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
 
                             </div>
-                            
                             <!--HospitalSection-->
 
                             <!-- AddressSection -->
@@ -318,7 +430,6 @@
 
 </div>
 
-
 <script>
     
     $("#BirthDate").MdPersianDateTimePicker({
@@ -341,6 +452,21 @@
         placement: 'right',
     });
 
+    $("#SymptomsDate").MdPersianDateTimePicker({
+        targetTextSelector: "#InputSymptomsDate",
+        placement: 'right',
+    });
+
+    $("#HospitalInDate").MdPersianDateTimePicker({
+        targetTextSelector: "#InputHospitalInDate",
+        placement: 'right',
+    });
+
+    $("#HospitalOutDate").MdPersianDateTimePicker({
+        targetTextSelector: "#InputHospitalOutDate",
+        placement: 'right',
+    });
+
     $(document).ready(function () {
         
         $("#firstSelect").select2({
@@ -349,21 +475,58 @@
 
         //begin
         //show or hide card-body by checkbox
-        var checkbox = $('#ts1'),
-            chShipBlock = $('#cardVaccine');
+        var checkbox1 = $('#ts1'),
+            chShipBlock1 = $('#vaccineCard');
 
-        chShipBlock.hide();
+        chShipBlock1.hide();
 
-        checkbox.on('click', function () {
+        checkbox1.on('click', function () {
             if ($(this).is(':checked')) {
-                chShipBlock.show();
-                chShipBlock.find('input').attr('required', true);
+                chShipBlock1.show();
+                chShipBlock1.find('input').attr('required', true);
             } else {
-                chShipBlock.hide();
-                chShipBlock.find('input').attr('required', false);
+                chShipBlock1.hide();
+                chShipBlock1.find('input').attr('required', false);
             }
         });
         //end
+
+        //Begin
+        var checkbox2 = $('#ts5'),
+            chShipBlock2 = $('#diseasName');
+
+        chShipBlock2.hide();
+
+        checkbox2.on('click', function () {
+            if ($(this).is(':checked')) {
+                chShipBlock2.show();
+                chShipBlock2.find('input').attr('required', true);
+            } else {
+                chShipBlock2.hide();
+                chShipBlock2.find('input').attr('required', false);
+            }
+        });
+        //End
+
+        //Begin
+        //Hide element by selecting an option from a selection list(comboBox)
+        const el = document.getElementById('Gender');
+        const box = document.getElementById('IsPregnant');
+        el.addEventListener('change', function handleChange(event) {
+            if (event.target.value === '2') {
+                box.style.visibility = 'visible';
+            } else {
+                box.style.visibility = 'hidden';
+            }
+        });
+        //End
+
+        //Begin
+        //Enabling Tooltip
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+        //End
 
         /*$("#InputBirthDate").inputmask("9999/99/99", { "placeholder": "_" });*/
 

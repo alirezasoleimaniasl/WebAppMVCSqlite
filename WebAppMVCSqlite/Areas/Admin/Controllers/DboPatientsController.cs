@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LineList.Data;
 using LineList.Models;
+using WebAppMVCSqlite.Areas.Admin.Models.ViewModels;
 
 namespace WebAppMVCSqlite.Areas.Admin.Controllers
 {
@@ -66,20 +67,21 @@ namespace WebAppMVCSqlite.Areas.Admin.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("PatientId,FirstName,LastName,NationalCode,DateOfBirth,Gender,Job,FatherName,PatientStatusId,VaccineId,LabId,AddressId,HospitalId")] DboPatient dboPatient)
+        public async Task<IActionResult> Create(PatientCreateEditViewModel ViewModel)
         {
-            if (ModelState.IsValid)
+            try
             {
-                _context.Add(dboPatient);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
             }
-            ViewData["AddressId"] = new SelectList(_context.DboAddresses, "AddressId", "AddressId", dboPatient.AddressId);
-            //ViewData["HospitalId"] = new SelectList(_context.DboHospitals, "HospitalId", "HospitalId", dboPatient.HospitalId);
-            //ViewData["LabId"] = new SelectList(_context.DboLaboratories, "LabId", "LabId", dboPatient.LabId);
-            ViewData["PatientStatusId"] = new SelectList(_context.DboPatientStatuses, "PatientStatusId", "PatientStatusId", dboPatient.PatientStatusId);
-            //ViewData["VaccineId"] = new SelectList(_context.DboVaccines, "VaccineId", "VaccineId", dboPatient.VaccineId);
-            return View(dboPatient);
+            catch
+            {
+
+            }
+            ViewBag.CityId = new SelectList(_context.DboCities, "CityId", "City");
+            ViewBag.HospitalId = new SelectList(_context.DboHospitals, "HospitalId", "Name");
+            ViewBag.LabId = new SelectList(_context.DboLabSources, "LabSourceId", "LabName");
+            ViewBag.VaccineId = new SelectList(_context.DboVaccineSources, "VaccineId", "Type");
+            return View(ViewModel);
         }
 
         // GET: Admin/DboPatients/Edit/5
