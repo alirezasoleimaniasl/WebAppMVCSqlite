@@ -81,6 +81,17 @@ namespace WebAppMVCSqlite.Areas.Admin.Controllers
             ViewBag.HospitalId = new SelectList(_context.DboHospitals, "HospitalId", "Name");
             ViewBag.LabId = new SelectList(_context.DboLabSources, "LabSourceId", "LabName");
             ViewBag.VaccineId = new SelectList(_context.DboVaccineSources, "VaccineId", "Type");
+            if (ViewModel.firstVaccineId.Value != null)
+            {
+                ViewBag.VaccineVisible = "d-block";
+                ViewBag.VaccineChecked = "checked";
+            }
+            else
+            {
+                ViewBag.VaccineVisible = "d-none";
+                ViewBag.VaccineChecked = "";
+            }
+                
             return View(ViewModel);
         }
 

@@ -144,11 +144,12 @@
                                 <div class="card-header">
                                     <div class="toggle-switch d-block" data-ts-color="success">
                                         <label for="ts1" class="ts-label">آیا بیمار واکسن کرونا زده است؟</label>
-                                        <input type="checkbox" id="ts1" hidden="hidden">
+                                        <input type="checkbox" id="ts1" hidden="hidden" @ViewBag.VaccineChecked>
                                         <label for="ts1" class="ts-helper float-left"></label>
                                     </div>
                                 </div>
-                                <div class="card-body" id="vaccineCard">
+
+                                <div class="card-body @ViewBag.VaccineVisible" id="vaccineCard">
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="form-group">
@@ -481,6 +482,16 @@
         chShipBlock1.hide();
 
         checkbox1.on('click', function () {
+            if ($(this).is(':checked')) {
+                chShipBlock1.show();
+                chShipBlock1.find('input').attr('required', true);
+            } else {
+                chShipBlock1.hide();
+                chShipBlock1.find('input').attr('required', false);
+            }
+        });
+
+        checkbox1.on('load', function () {
             if ($(this).is(':checked')) {
                 chShipBlock1.show();
                 chShipBlock1.find('input').attr('required', true);
