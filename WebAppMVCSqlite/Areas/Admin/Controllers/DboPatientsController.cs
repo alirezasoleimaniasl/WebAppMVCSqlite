@@ -57,7 +57,7 @@ namespace WebAppMVCSqlite.Areas.Admin.Controllers
             ViewBag.CityId = new SelectList(_context.DboCities, "CityId", "City");
             ViewBag.HospitalId = new SelectList(_context.DboHospitals, "HospitalId", "Name");
             ViewBag.LabId  = new SelectList(_context.DboLabSources, "LabSourceId", "LabName");
-            //ViewData["PatientStatusId"] = new SelectList(_context.DboPatientStatuses, "PatientStatusId", "PatientStatusId");
+            ViewBag.HospitalSection = new SelectList(_context.DboHospitalSections,"HospitalSectionID");
             ViewBag.VaccineId = new SelectList(_context.DboVaccineSources, "VaccineId", "Type");
             return View();
         }
@@ -71,7 +71,8 @@ namespace WebAppMVCSqlite.Areas.Admin.Controllers
         {
             try
             {
-
+                List<DboLabSource> labrotories = new List<DboLabSource>();
+                List<DboVaccineSource> vaccines = new List<DboVaccineSource>();
             }
             catch
             {
@@ -81,7 +82,7 @@ namespace WebAppMVCSqlite.Areas.Admin.Controllers
             ViewBag.HospitalId = new SelectList(_context.DboHospitals, "HospitalId", "Name");
             ViewBag.LabId = new SelectList(_context.DboLabSources, "LabSourceId", "LabName");
             ViewBag.VaccineId = new SelectList(_context.DboVaccineSources, "VaccineId", "Type");
-            if (ViewModel.firstVaccineId.Value != null)
+            if (ViewModel.firstVaccineId != null)
             {
                 ViewBag.VaccineVisible = "d-block";
                 ViewBag.VaccineChecked = "checked";
@@ -90,6 +91,22 @@ namespace WebAppMVCSqlite.Areas.Admin.Controllers
             {
                 ViewBag.VaccineVisible = "d-none";
                 ViewBag.VaccineChecked = "";
+            }
+            if(ViewModel.Gender == "1")
+            {
+                ViewBag.IsPregnantVisible = "d-none";
+            }
+            else
+            {
+                ViewBag.IsPregnantVisible = "d-block";
+            }
+            if(ViewModel.UnderlyingDiseas == true)
+            {
+                ViewBag.UderLyingDiseasVisible = "d-block";
+            }
+            else
+            {
+                ViewBag.UderLyingDiseasVisible = "d-none";
             }
                 
             return View(ViewModel);

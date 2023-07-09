@@ -1,0 +1,8 @@
+1.Scaffolding database first 
+dotnet ef dbcontext scaffold Name=LineListDB Microsoft.EntityFrameworkCore.Sqlite --output-dir Models --context-dir Data --namespace LineList.Models --context-namespace LineList.Data --context LineListContext -f --no-onconfiguring --project WebAppMVCSqlite
+
+2.Add migration
+dotnet ef dbcontext scaffold Name=LineListDB Microsoft.EntityFrameworkCore.Sqlite --output-dir Models --context-dir Data --namespace LineList.Models --context-namespace LineList.Data --context LineListContext -f --no-onconfiguring --project WebAppMVCSqlite
+
+3.Update Database
+dotnet ef database update

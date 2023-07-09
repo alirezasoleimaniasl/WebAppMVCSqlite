@@ -9,5 +9,9 @@ public partial class DboHospital
 
     public string? Name { get; set; }
 
+    public long? HospitalSection { get; set; }
+
     public virtual ICollection<DboPatientStatus> DboPatientStatuses { get; set; } = new List<DboPatientStatus>();
+
+    public virtual DboHospitalSection? HospitalSectionNavigation { get; set; }
 }

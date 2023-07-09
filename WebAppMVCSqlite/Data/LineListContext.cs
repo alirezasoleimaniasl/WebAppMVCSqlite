@@ -18,6 +18,8 @@ public partial class LineListContext : DbContext
 
     public virtual DbSet<DboHospital> DboHospitals { get; set; }
 
+    public virtual DbSet<DboHospitalSection> DboHospitalSections { get; set; }
+
     public virtual DbSet<DboLabSample> DboLabSamples { get; set; }
 
     public virtual DbSet<DboLabSource> DboLabSources { get; set; }
@@ -67,7 +69,23 @@ public partial class LineListContext : DbContext
             entity.ToTable("dbo.Hospital");
 
             entity.Property(e => e.HospitalId).HasColumnName("HospitalID");
+            entity.Property(e => e.HospitalSection).HasColumnType("BIGINT");
             entity.Property(e => e.Name).HasColumnType("NVARCHAR (1000)");
+
+            entity.HasOne(d => d.HospitalSectionNavigation).WithMany(p => p.DboHospitals).HasForeignKey(d => d.HospitalSection);
+        });
+
+        modelBuilder.Entity<DboHospitalSection>(entity =>
+        {
+            entity.HasKey(e => e.HospitalSectionId);
+
+            entity.ToTable("dbo.HospitalSection");
+
+            entity.Property(e => e.HospitalSectionId)
+                .ValueGeneratedNever()
+                .HasColumnType("BIGINT")
+                .HasColumnName("HospitalSectionID");
+            entity.Property(e => e.HospitalSectionName).HasColumnType("VARCHAR (100)");
         });
 
         modelBuilder.Entity<DboLabSample>(entity =>
