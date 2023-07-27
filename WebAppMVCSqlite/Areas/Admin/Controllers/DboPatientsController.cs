@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using LineList.Data;
 using LineList.Models;
 using WebAppMVCSqlite.Areas.Admin.Models.ViewModels;
+using BookShop.Classes;
 
 namespace WebAppMVCSqlite.Areas.Admin.Controllers
 {
@@ -15,10 +16,12 @@ namespace WebAppMVCSqlite.Areas.Admin.Controllers
     public class DboPatientsController : Controller
     {
         private readonly LineListContext _context;
+        private readonly IConvertDate _convertDate;
 
-        public DboPatientsController(LineListContext context)
+        public DboPatientsController(LineListContext context, IConvertDate convertDate)
         {
             _context = context;
+            _convertDate = convertDate;
         }
 
         // GET: Admin/DboPatients
@@ -71,8 +74,21 @@ namespace WebAppMVCSqlite.Areas.Admin.Controllers
         {
             try
             {
-                List<DboLabSource> labrotories = new List<DboLabSource>();
-                List<DboVaccineSource> vaccines = new List<DboVaccineSource>();
+                DboPatientStatus _patientStatus = new DboPatientStatus()
+                {
+
+                };
+
+                DboPatient _patient = new DboPatient()
+                {
+                    FirstName = ViewModel.FirstName,
+                    LastName = ViewModel.LastName,
+                    NationalCode = ViewModel.NationalCode,
+                    DateOfBirth = ViewModel.DateOfBirth != null ? _convertDate.ConvertShamsiToMiladi(ViewModel.DateOfBirth).ToString() : "",
+                    Gender = ViewModel.Gender,
+                    Job= ViewModel.Job,
+                    FatherName = ViewModel.FatherName, 
+                };
             }
             catch
             {
